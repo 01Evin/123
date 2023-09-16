@@ -17,15 +17,6 @@ import concurrent.futures
 import time
 import subprocess
 
-checkpoint_url = {
-    "Dark_sushi_mix.safetensors"     : "https://huggingface.co/mdl-mirror/dark-sushi-mix/resolve/main/darkSushiMixMix_brighter.safetensors",
-    "AnythingV5V3_v5PrtRE.safetensors"     : "https://huggingface.co/ckpt/anything-v5.0/resolve/main/AnythingV5V3_v5PrtRE.safetensors",
-    "chilloutmix_NiPrunedFp16Fix.safetensors"      : "https://huggingface.co/naonovn/chilloutmix_NiPrunedFp32Fix/resolve/main/chilloutmix_NiPrunedFp32Fix.safetensors",
-    "rpg_V4.safetensors"         : "https://huggingface.co/Anashel/rpg/resolve/main/RPG-V4-Model-Download/RPG-v4.safetensors",
-    "ProtoGen_X5.8-pruned-fp16.safetensors"         : "https://huggingface.co/darkstorm2150/Protogen_x5.8_Official_Release/resolve/main/ProtoGen_X5.8-pruned-fp16.safetensors",
-    "none"         : "",
-}
-
 def run_git_download():
   start_time = time.time()
   #xformers加速
