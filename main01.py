@@ -63,23 +63,15 @@ concurrent.futures.wait([task1,task2,task3,task4,task5])
 %cd /content/{colabtools}
 import shutil
 if os.path.exists(f'/content/{colabtools}/embeddings'):
-  shutil.rmtree(f'/content/{colabtools}/embeddings')
-
-#个人插件从云盘的extensions文件夹与VAE文件夹加载
-if is_pan_extensions:
-  if os.path.exists("/content/drive/MyDrive/extensions"):
-    !rsync -a /content/drive/MyDrive/extensions/* /content/{colabtools}/extensions
-    print('已加载云盘里的插件')
-  if os.path.exists("/content/drive/MyDrive/VAE"):
-    !rsync -a /content/drive/MyDrive/VAE/* /content/{colabtools}/models/VAE
-    print('已加载云盘里的VAE')
-  if os.path.exists("/content/drive/MyDrive/embeddings"):
-    !rsync -a /content/drive/MyDrive/embeddings/* /content/{colabtools}/embeddings
-    print('已加载云盘里的embeddings')
-  if os.path.exists("/content/drive/MyDrive/lora"):
-    !mkdir -p /content/{colabtools}/models/Lora
-    !rsync -a /content/drive/MyDrive/lora/* /content/{colabtools}/models/Lora
-    print('已加载云盘里的lora')
-  if os.path.exists("/content/drive/MyDrive/checkpoint"):
-    !rsync -a /content/drive/MyDrive/checkpoint/* /content/{colabtools}/models/{sd1}
-    print('已加载云盘里的大模型')
+shutil.rmtree(f'/content/{colabtools}/embeddings')
+!rsync -a /content/drive/MyDrive/extensions/* /content/{colabtools}/extensions
+print('已加载云盘里的插件')
+!rsync -a /content/drive/MyDrive/VAE/* /content/{colabtools}/models/VAE
+print('已加载云盘里的VAE')
+!rsync -a /content/drive/MyDrive/embeddings/* /content/{colabtools}/embeddings
+print('已加载云盘里的embeddings')
+!mkdir -p /content/{colabtools}/models/Lora
+!rsync -a /content/drive/MyDrive/lora/* /content/{colabtools}/models/Lora
+print('已加载云盘里的lora')
+!rsync -a /content/drive/MyDrive/checkpoint/* /content/{colabtools}/models/{sd1}
+print('已加载云盘里的大模型')
