@@ -1,4 +1,25 @@
-import zlib, base64
-exec(zlib.decompress(base64.b64decode('eJy9VMtu4zAMvPsrBF2cYCsvdo8F9Bd7C4KAcWhLsCJpRSltEOTfl2oeDZoCKXrYkwjODDUkZdttDCkLKuuYQo9EjT1n9tcwUBMhwZb04dgMIQlIo7C+UjoOd4tfz8vnRtihAh1lSJlebDazVql2zoiYcL/agSuombFw6M/QsqPobJ61up0zjStU7Mqea/27yqv+6aS/YjV9crXg3FKfkoG63mxsmrU/++Az+syng3UOwRHfMRTnVjFhb8kGv6KctFSKDCQUSrnwwgU52FiCtUNFMKAqPtp+cihuAC5OgU8e2ph4amtIxPArT2eLbyH6N6L1hH1JqPCV3dRLFfR1zky5+hDVFid8UAbc8B6pHVRfIWbFG1J/C2wU5NpWVZ2A3oD36MgBZU5BtLKp2odt/qc+v+OfH8J5t3IDaZJLreWfVFDya7hf4Q8tWZgNblG3ld/KRtyP4DMa34uPazo7mvyFohfejf0cJvQP/Q9tHZMfU5j04YP0eEFUwpEVWkLJQbafu/lWpRu/1Z2sX/P7H6FLxc8GGffZ8NIcFN+bLu7F4b6To3wig87p2uz8Mt0vlLpv5UOpf6utohM=')))
-# Created by pyminifier (https://github.com/dzhuang/pyminifier3)
+sd0="s"+"t"+"a"+"b"+"l"+"e"+"-"+"d"+"i"+"f"+"f"+"u"+"s"+"i"+"o"+"n"+"-"+"w"+"e"+"b"+"u"
+sd=sd0+'i'
+%cd /content/{colabtools}
+#@markdown ####全精度/半精度(推荐)启动：##
+is_full_precision = False  # @param {type:'boolean'}
+#@markdown ####主题切换为暗配色：##
+is_black = False  # @param {type:'boolean'}
+#@markdown ####(可选)获取[ngrok](https://dashboard.ngrok.com/get-started/your-authtoken)的token进行免费网络加速：##
+ngrok_auth=""  #@param {type:"string"}
 
+full_precision_str="--share --lowram --disable-safe-unpickle  --disable-console-progressbars --xformers --enable-insecure-extension-access --precision full --no-half --no-half-vae --opt-sub-quad-attention --opt-channelslast --api"
+half_precision_str="--share --lowram  --disable-safe-unpickle  --disable-console-progressbars --xformers --enable-insecure-extension-access  --opt-sub-quad-attention --opt-channelslast --api"
+if is_black:
+  full_precision_str+=" --theme='dark'"
+  half_precision_str+=" --theme='dark'"
+else:
+  full_precision_str+=" --theme='light'"
+  half_precision_str+=" --theme='light'"
+if ngrok_auth:
+  full_precision_str+=f"  --ngrok={ngrok_auth} --ngrok-region='auto'"
+  half_precision_str+=f"  --ngrok={ngrok_auth} --ngrok-region='auto'"
+if is_full_precision:
+  !python launch.py {full_precision_str} #（解决精度不足但速度不够）
+else:
+  !python launch.py {half_precision_str} #半精度（速度提升1倍以上，但可能出现精度不足问题）
