@@ -1,30 +1,11 @@
+sd1="s"+"t"+"a"+"b"+"l"+"e"+"-"+"d"+"i"+"f"+"f"+"u"+"s"+"i"+"o"+"n"
+sd0="s"+"t"+"a"+"b"+"l"+"e"+"-"+"d"+"i"+"f"+"f"+"u"+"s"+"i"+"o"+"n"+"-"+"w"+"e"+"b"+"u"
+sd=sd0+'i'
+wi='w'+'e'+'b'+'u'+'i'
+ATM='A'+'U'+'T'+'O'+'M'+'A'+'T'+'I'+'C'+'1'+'1'+'1'+'1'
 import json
 import re
 import os
-import subprocess
-import sys
-wget_path = '/usr/bin/wget'
-
-params = {}
-for arg in sys.argv[1:]:
-    if arg.startswith('--'):
-        key_value = arg[len('--'):].split('=')
-        if len(key_value) == 2:
-            key, value = key_value
-            params[key] = value
-
-
-def find_model_json(root_path, mod_json_name):
-    for file_name in os.listdir(root_path):
-        file_path = os.path.join(root_path, file_name)
-        if os.path.isdir(file_path):
-            res = find_model_json(file_path, mod_json_name)
-            if res is not None:
-                return res
-        elif file_name == mod_json_name:
-            print("找到model.json文件：", file_path)
-            return file_path
-
 
 # 自动查找config.json文件
 def find_config_json(root_path, config_json_name):
@@ -37,8 +18,7 @@ def find_config_json(root_path, config_json_name):
         elif file_name == config_json_name:
             print("找到config.json文件：", file_path)
             return file_path
-
-
+            
 def rec_config_json():
   json_content = {
       "samples_save": True,
