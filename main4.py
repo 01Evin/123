@@ -11,3 +11,6 @@ import os
 folder_path = "/content/colabtools"
 # 使用os.chdir()进入文件夹
 os.chdir(folder_path)
+
+half_precision_str="--share --lowram  --disable-safe-unpickle  --disable-console-progressbars --xformers --enable-insecure-extension-access  --opt-sub-quad-attention --opt-channelslast --api --theme dark"
+!python launch.py {half_precision_str}
