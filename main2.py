@@ -87,6 +87,20 @@ command = f"sudo rsync -a {source} {destination}"
 subprocess.run(command, shell=True, check=True)
 print("已加载云盘里的插件")
 
+if os.path.exists("/content/drive/MyDrive/checkpoint"):
+  import subprocess
+# 用subprocess执行rsync命令
+source8 = "/content/drive/MyDrive/checkpoint/*"
+destination8 = f"/content/colabtools/models/Stable-diffusion"
+commandr = f"sudo rsync -a {source8} {destination8}"
+subprocess.run(commandr, shell=True, check=True)
+print("已加载云盘里的大模型")
 
-
-
+if os.path.exists("/content/drive/MyDrive/embeddings"):
+  import subprocess
+# 用subprocess执行rsync命令
+source9 = "/content/drive/MyDrive/embeddings/*"
+destination9 = f"/content/colabtools/embeddings"
+commandp = f"sudo rsync -a {source9} {destination9}"
+subprocess.run(commandp, shell=True, check=True)
+print("已加载云盘里的embeddings")
