@@ -10,8 +10,6 @@ def generate_random_string(length):
     return ''.join(random.choice(letters) for _ in range(length))
 colabtools ="colabtools_"+generate_random_string(6)
 
-%cd /content/
-
 if sd_wi=="anapnoe手机端完美适配":
   !git clone https://github.com/anapnoe/{sd} /content/{colabtools}
 elif sd_wi=="AUTOMATIC1111原版v1.3.0(稳定)":
