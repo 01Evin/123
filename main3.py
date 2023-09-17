@@ -213,95 +213,12 @@ def rec_config_json():
       "no_dpmpp_sde_batch_determinism": False,
       "control_net_max_models_num": 3,
   }
-    if params["image"] == "True":
-        json_content["outdir_txt2img_samples"] = "/content/drive/MyDrive/outputs/txt2img-images"
-        json_content["outdir_img2img_samples"] = "/content/drive/MyDrive/outputs/img2img-images"
-        json_content["outdir_extras_samples"] = "/content/drive/MyDrive/outputs/extras-images"
-        json_content["outdir_txt2img_grids"] = "/content/drive/MyDrive/outputs/txt2img-grids"
-        json_content["outdir_img2img_grids"] = "/content/drive/MyDrive/outputs/img2img-grids"
-    with open(f'{params["dir"]}/config.json', 'w') as configFile:
+  if params["image"] == "True":
+      json_content["outdir_txt2img_samples"] = "/content/drive/MyDrive/outputs/txt2img-images"
+      json_content["outdir_img2img_samples"] = "/content/drive/MyDrive/outputs/img2img-images"
+      json_content["outdir_extras_samples"] = "/content/drive/MyDrive/outputs/extras-images"
+      json_content["outdir_txt2img_grids"] = "/content/drive/MyDrive/outputs/txt2img-grids"
+      json_content["outdir_img2img_grids"] = "/content/drive/MyDrive/outputs/img2img-grids"
+  with open(f'{params["dir"]}/config.json', 'w') as configFile:
         json.dump(json_content, configFile, ensure_ascii=False, indent=4)
-
-
-if params["config"]== "False":
-    rec_config_json()
-else:
-    res_config_json = find_config_json('/content/drive/', 'config.json')
-    print(res_config_json)
-    subprocess.run(f'cp {res_config_json} {params["dir"]}/config.json', shell=True)
-
-# 图片自动下载脚本
-if params["download"]== "True":
-    subprocess.run([wget_path, '-O', f'{params["dir"]}/javascript/png_auto_download.js', 'https://github.com/s4afa451dgf415f/colab_stable_diffusion/raw/main/png_auto_download.js'], check=True)
-else:
-    if os.path.exists(f'{params["dir"]}/javascript/png_auto_downloadjs'):
-        os.remove(f'{params["dir"]}/javascript/png_auto_download.js')
-
-# anapnoe版本
-if params["ui"] == "anapnoe手机端完美适配":
-    # png_info脚本
-    subprocess.run([wget_path, '-O', f'{params["dir"]}/javascript/PNG_info_web.js',
-                    'https://github.com/s4afa451dgf415f/colab_stable_diffusion/raw/main/PNG_info_web.js'],
-                   check=True)
-    with open(f'{params["dir"]}/modules/ui.py', 'r') as readFile:
-        content = readFile.read()
-    content = content.replace('''                for tabname, button in buttons.items():
-                    parameters_copypaste.register_paste_params_button(parameters_copypaste.ParamBinding(
-                        paste_button=button, tabname=tabname, source_text_component=generation_info, source_image_component=image,
-                    ))
-
-        image.change(
-            fn=wrap_gradio_call(modules.extras.run_pnginfo),
-            inputs=[image],
-            outputs=[html, generation_info, html2],
-        )''', '')
-    content = content.replace('''["txt2img", "img2img", "inpaint", "extras"]''',
-                              '["txt2img", "img2img", "inpaint", "tagger图生文"]')
-
-    with open(f'{params["dir"]}/modules/ui.py', 'w') as writeFile:
-        writeFile.write(content)
-
-    # png_info脚本兼容
-    with open(f'{params["dir"]}/javascript/PNG_info_web.js', 'r') as readFile:
-        content = readFile.read()
-    content = content.replace('''querySelector("#tab_pnginfo > div > div > div:nth-child(2) > div:nth-child(3)")''',
-                              'querySelector("#tab_pnginfo > div > div>div>div:nth-child(4)")')
-    with open(f'{params["dir"]}/javascript/PNG_info_web.js', 'w') as writeFile:
-        writeFile.write(content)
-
-# automatic111版本
-else:
-    # 手机平板
-    css_content = '''
-  @media screen and (max-width: 600px) {
-    .gradio-slider input[type="range"]{
-      display: none;
-    }
-    .gradio-slider input[type="number"]{
-      width: 18em;
-  }
-  }
-  '''
-    with open(f'{params["dir"]}/style.css', 'a') as cssFile:
-        cssFile.write(css_content)
-    # png_info脚本
-    subprocess.run([wget_path, '-O', f'{params["dir"]}/javascript/PNG_info_web.js',
-                    'https://github.com/s4afa451dgf415f/colab_stable_diffusion/raw/main/PNG_info_web.js'],
-                   check=True)
-    # 拦截png_info
-    with open(f'{params["dir"]}/modules/ui.py', 'r') as readFile:
-        content = readFile.read()
-    content = content.replace('''                for tabname, button in buttons.items():
-                    parameters_copypaste.register_paste_params_button(parameters_copypaste.ParamBinding(
-                        paste_button=button, tabname=tabname, source_text_component=generation_info, source_image_component=image,
-                    ))
-
-        image.change(
-            fn=wrap_gradio_call(modules.extras.run_pnginfo),
-            inputs=[image],
-            outputs=[html, generation_info, html2],
-        )''', '')
-    content = content.replace('''["txt2img", "img2img", "inpaint", "extras"]''',
-                              '["txt2img", "img2img", "inpaint", "tagger图生文"]')
-    with open(f'{params["dir"]}/modules/ui.py', 'w') as writeFile:
-        writeFile.write(content)
+print("完成配置")
