@@ -3,91 +3,80 @@ sd0="s"+"t"+"a"+"b"+"l"+"e"+"-"+"d"+"i"+"f"+"f"+"u"+"s"+"i"+"o"+"n"+"-"+"w"+"e"+
 sd=sd0+'i'
 wi='w'+'e'+'b'+'u'+'i'
 ATM='A'+'U'+'T'+'O'+'M'+'A'+'T'+'I'+'C'+'1'+'1'+'1'+'1'
-import random
-import string
-def generate_random_string(length):
-    letters = string.ascii_letters + string.digits
-    return ''.join(random.choice(letters) for _ in range(length))
-colabtools ="colabtools_"+generate_random_string(6)
-
-!git clone -b v1.6.0 --single-branch https://github.com/{ATM}/{sd} /content/{colabtools}
-
 import concurrent.futures
 import time
 import subprocess
+import random
+import string
+import os
 
-checkpoint_url = {
-    "Dark_sushi_mix.safetensors"     : "https://huggingface.co/mdl-mirror/dark-sushi-mix/resolve/main/darkSushiMixMix_brighter.safetensors",
-    "AnythingV5V3_v5PrtRE.safetensors"     : "https://huggingface.co/ckpt/anything-v5.0/resolve/main/AnythingV5V3_v5PrtRE.safetensors",
-    "chilloutmix_NiPrunedFp16Fix.safetensors"      : "https://huggingface.co/naonovn/chilloutmix_NiPrunedFp32Fix/resolve/main/chilloutmix_NiPrunedFp32Fix.safetensors",
-    "rpg_V4.safetensors"         : "https://huggingface.co/Anashel/rpg/resolve/main/RPG-V4-Model-Download/RPG-v4.safetensors",
-    "ProtoGen_X5.8-pruned-fp16.safetensors"         : "https://huggingface.co/darkstorm2150/Protogen_x5.8_Official_Release/resolve/main/ProtoGen_X5.8-pruned-fp16.safetensors",
-    "none"         : "",
-}
+git_clone_command = "git clone -b v1.6.0 --single-branch https://github.com/AUTOMATIC1111/stable-diffusion-webui /content/colabtools"
+subprocess.run(git_clone_command, shell=True)
 
-def run_git_download():
-  start_time = time.time()
-  #xformers加速
-  end_time = time.time()
-  print("已克隆git耗时：", end_time-start_time, "秒")
+# 第一个命令
+command1 = "aria2c --console-log-level=error -c -x 16 -s 16 -k 1M https://huggingface.co/lokCX/4x-Ultrasharp/resolve/main/4x-UltraSharp.pth -d /content/colabtools/models/ESRGAN/ -o 4x-UltraSharp.pth"
+# 执行第一个命令
+subprocess.run(command1, shell=True)
+# 第二个命令
+command2 = "aria2c --console-log-level=error -c -x 16 -s 16 -k 1M https://huggingface.co/datasets/daasd/CN.csv/resolve/main/CN.csv -d /content/colabtools/extensions/a1111-sd-{wi}-tagcomplete/tags -o CN.csv"
+# 执行第二个命令
+subprocess.run(command2, shell=True)
 
-def run_aria2c_download():
-  start_time = time.time()
-  cmd=f"aria2c --console-log-level=error -c -x 16 -s 16 -k 1M {checkpoint_url[first_checkpoint]}  -d /content/{colabtools}/models/Stable-diffusion -o {first_checkpoint}"
-  subprocess.run(cmd, shell=True)
-    
-  end_time = time.time()
-  print("aria2c完成下载耗时：", end_time-start_time, "秒")
+command3 = "apt install libunwind8-dev -yqq"
+os.environ["LD_PRELOAD"] = "libtcmalloc.so.4"
+os.environ["TF_CPP_MIN_LOG_LEVEL"] = "3"
+command4 = "sudo apt-get install sox ffmpeg libcairo2 libcairo2-dev"
+subprocess.run(command3, shell=True)
+subprocess.run(command4, shell=True)
 
-def curl_download():
-  start_time = time.time()
-  end_time = time.time()
-  print("curl完成下载耗时：", end_time-start_time,"秒")
+command5 = "pip install xformers xformers==0.0.20"
+subprocess.run(command5, shell=True)
 
-def wget_download():
-  start_time = time.time()
-  !apt install libunwind8-dev -yqq
-  os.environ["LD_PRELOAD"] = "libtcmalloc.so.4"
-  os.environ["TF_CPP_MIN_LOG_LEVEL"] = "3"
-  !sudo apt-get install sox ffmpeg libcairo2 libcairo2-dev
-  end_time = time.time()
-  print("wget完成下载耗时：", end_time-start_time,"秒")
+# 假设您想执行一个需要特权的命令，例如apt-get update
+command01 = "apt-get update"
 
-def pip_download():
-  start_time = time.time()
-  !pip install xformers xformers==0.0.20
-  end_time = time.time()
-  print("pip完成下载耗时：", end_time-start_time,"秒")
+# 使用subprocess执行命令
+process = subprocess.Popen(command01, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
 
-executor = concurrent.futures.ThreadPoolExecutor(max_workers=5)
-task1 = executor.submit(run_git_download)
-task2 = executor.submit(run_aria2c_download)
-task3 = executor.submit(curl_download)
-task4 = executor.submit(wget_download)
-task5 = executor.submit(pip_download)
-concurrent.futures.wait([task1,task2,task3,task4,task5])
+# 等待命令执行完毕并获取输出
+stdout, stderr = process.communicate()
 
-%cd /content/{colabtools}
-import shutil
-if os.path.exists(f'/content/{colabtools}/embeddings'):
-  shutil.rmtree(f'/content/{colabtools}/embeddings')
+# 打印命令输出
+print("标准输出：", stdout.decode())
+print("标准错误：", stderr.decode())
 
-#个人插件从云盘的extensions文件夹与VAE文件夹加载
-if is_pan_extensions:
-  if os.path.exists("/content/drive/MyDrive/extensions"):
-    !rsync -a /content/drive/MyDrive/extensions/* /content/{colabtools}/extensions
-    print('已加载云盘里的插件')
-  if os.path.exists("/content/drive/MyDrive/VAE"):
-    !rsync -a /content/drive/MyDrive/VAE/* /content/{colabtools}/models/VAE
-    print('已加载云盘里的VAE')
-  if os.path.exists("/content/drive/MyDrive/embeddings"):
-    !rsync -a /content/drive/MyDrive/embeddings/* /content/{colabtools}/embeddings
-    print('已加载云盘里的embeddings')
-  if os.path.exists("/content/drive/MyDrive/lora"):
-    !mkdir -p /content/{colabtools}/models/Lora
-    !rsync -a /content/drive/MyDrive/lora/* /content/{colabtools}/models/Lora
-    print('已加载云盘里的lora')
-  if os.path.exists("/content/drive/MyDrive/checkpoint"):
-    !rsync -a /content/drive/MyDrive/checkpoint/* /content/{colabtools}/models/{sd1}
-    print('已加载云盘里的大模型')
+# 检查命令是否成功执行
+if process.returncode == 0:
+    print("命令成功执行")
+else:
+    print("命令执行失败")
+
+commandA = "apt update"
+commandB = "apt install rsync"
+subprocess.run(commandA, shell=True)
+subprocess.run(commandB, shell=True)
+
+if os.path.exists("/content/drive/MyDrive/extensions"):
+  import subprocess
+# 用subprocess执行rsync命令
+source0 = "/content/drive/MyDrive/extensions/*"
+destination0 = f"/content/colabtools/extensions"
+command = f"rsync -a {source0} {destination0}"
+print("已加载云盘里的插件")
+
+if os.path.exists("/content/drive/MyDrive/embeddings"):
+  import subprocess
+# 用subprocess执行rsync命令
+source1 = "/content/drive/MyDrive/embeddings/*"
+destination1 = f"/content/colabtools/embeddings"
+command = f"sudo rsync -a {source1} {destination1}"
+print("已加载云盘里的embeddings")
+
+if os.path.exists("/content/drive/MyDrive/embeddings"):
+  import subprocess
+# 用subprocess执行rsync命令
+source2 = "/content/drive/MyDrive/VAE/*"
+destination2 = f"/content/colabtools/models/VAE"
+command = f"sudo rsync -a {source2} {destination2}"
+print("已加载云盘里的VAE")
 
