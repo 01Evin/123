@@ -1,4 +1,101 @@
-import zlib, base64
-exec(zlib.decompress(base64.b64decode('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')))
-# Created by pyminifier (https://github.com/dzhuang/pyminifier3)
+sd1="s"+"t"+"a"+"b"+"l"+"e"+"-"+"d"+"i"+"f"+"f"+"u"+"s"+"i"+"o"+"n"
+sd0="s"+"t"+"a"+"b"+"l"+"e"+"-"+"d"+"i"+"f"+"f"+"u"+"s"+"i"+"o"+"n"+"-"+"w"+"e"+"b"+"u"
+sd=sd0+'i'
+wi='w'+'e'+'b'+'u'+'i'
+ATM='A'+'U'+'T'+'O'+'M'+'A'+'T'+'I'+'C'+'1'+'1'+'1'+'1'
+import random
+import string
+def generate_random_string(length):
+    letters = string.ascii_letters + string.digits
+    return ''.join(random.choice(letters) for _ in range(length))
+colabtools ="colabtools_"+generate_random_string(6)
+
+%cd /content/
+
+if sd_wi=="anapnoe手机端完美适配":
+  !git clone https://github.com/anapnoe/{sd} /content/{colabtools}
+elif sd_wi=="AUTOMATIC1111原版v1.3.0(稳定)":
+  !git clone -b v1.3.0 --single-branch https://github.com/{ATM}/{sd} /content/{colabtools}
+else:
+  !git clone -b v1.6.0 --single-branch https://github.com/{ATM}/{sd} /content/{colabtools}
+
+import concurrent.futures
+import time
+import subprocess
+
+checkpoint_url = {
+    "Dark_sushi_mix.safetensors"     : "https://huggingface.co/mdl-mirror/dark-sushi-mix/resolve/main/darkSushiMixMix_brighter.safetensors",
+    "AnythingV5V3_v5PrtRE.safetensors"     : "https://huggingface.co/ckpt/anything-v5.0/resolve/main/AnythingV5V3_v5PrtRE.safetensors",
+    "chilloutmix_NiPrunedFp16Fix.safetensors"      : "https://huggingface.co/naonovn/chilloutmix_NiPrunedFp32Fix/resolve/main/chilloutmix_NiPrunedFp32Fix.safetensors",
+    "rpg_V4.safetensors"         : "https://huggingface.co/Anashel/rpg/resolve/main/RPG-V4-Model-Download/RPG-v4.safetensors",
+    "ProtoGen_X5.8-pruned-fp16.safetensors"         : "https://huggingface.co/darkstorm2150/Protogen_x5.8_Official_Release/resolve/main/ProtoGen_X5.8-pruned-fp16.safetensors",
+    "none"         : "",
+}
+
+def run_git_download():
+  start_time = time.time()
+  #xformers加速
+  end_time = time.time()
+  print("已克隆git耗时：", end_time-start_time, "秒")
+
+def run_aria2c_download():
+  start_time = time.time()
+  cmd=f"aria2c --console-log-level=error -c -x 16 -s 16 -k 1M {checkpoint_url[first_checkpoint]}  -d /content/{colabtools}/models/Stable-diffusion -o {first_checkpoint}"
+  subprocess.run(cmd, shell=True)
+  !aria2c --console-log-level=error -c -x 16 -s 16 -k 1M https://huggingface.co/lokCX/4x-Ultrasharp/resolve/main/4x-UltraSharp.pth -d /content/{colabtools}/models/ESRGAN/ -o 4x-UltraSharp.pth
+  !aria2c --console-log-level=error -c -x 16 -s 16 -k 1M https://huggingface.co/datasets/daasd/CN.csv/resolve/main/CN.csv -d /content/{colabtools}/extensions/a1111-sd-{wi}-tagcomplete/tags -o CN.csv
+  end_time = time.time()
+  print("aria2c完成下载耗时：", end_time-start_time, "秒")
+
+def curl_download():
+  start_time = time.time()
+  end_time = time.time()
+  print("curl完成下载耗时：", end_time-start_time,"秒")
+
+def wget_download():
+  start_time = time.time()
+  !apt install libunwind8-dev -yqq
+  os.environ["LD_PRELOAD"] = "libtcmalloc.so.4"
+  os.environ["TF_CPP_MIN_LOG_LEVEL"] = "3"
+  !sudo apt-get install sox ffmpeg libcairo2 libcairo2-dev
+  end_time = time.time()
+  print("wget完成下载耗时：", end_time-start_time,"秒")
+
+def pip_download():
+  start_time = time.time()
+  !pip install xformers xformers==0.0.20
+  end_time = time.time()
+  print("pip完成下载耗时：", end_time-start_time,"秒")
+
+executor = concurrent.futures.ThreadPoolExecutor(max_workers=5)
+task1 = executor.submit(run_git_download)
+task2 = executor.submit(run_aria2c_download)
+task3 = executor.submit(curl_download)
+task4 = executor.submit(wget_download)
+task5 = executor.submit(pip_download)
+concurrent.futures.wait([task1,task2,task3,task4,task5])
+
+%cd /content/{colabtools}
+import shutil
+if os.path.exists(f'/content/{colabtools}/embeddings'):
+  shutil.rmtree(f'/content/{colabtools}/embeddings')
+
+#个人插件从云盘的extensions文件夹与VAE文件夹加载
+if is_pan_extensions:
+  if os.path.exists("/content/drive/MyDrive/extensions"):
+    !rsync -a /content/drive/MyDrive/extensions/* /content/{colabtools}/extensions
+    print('已加载云盘里的插件')
+  if os.path.exists("/content/drive/MyDrive/VAE"):
+    !rsync -a /content/drive/MyDrive/VAE/* /content/{colabtools}/models/VAE
+    print('已加载云盘里的VAE')
+  if os.path.exists("/content/drive/MyDrive/embeddings"):
+    !rsync -a /content/drive/MyDrive/embeddings/* /content/{colabtools}/embeddings
+    print('已加载云盘里的embeddings')
+  if os.path.exists("/content/drive/MyDrive/lora"):
+    !mkdir -p /content/{colabtools}/models/Lora
+    !rsync -a /content/drive/MyDrive/lora/* /content/{colabtools}/models/Lora
+    print('已加载云盘里的lora')
+  if os.path.exists("/content/drive/MyDrive/checkpoint"):
+    !rsync -a /content/drive/MyDrive/checkpoint/* /content/{colabtools}/models/{sd1}
+    print('已加载云盘里的大模型')
 
