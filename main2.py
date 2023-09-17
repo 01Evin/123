@@ -42,8 +42,7 @@ def run_aria2c_download():
   start_time = time.time()
   cmd=f"aria2c --console-log-level=error -c -x 16 -s 16 -k 1M {checkpoint_url[first_checkpoint]}  -d /content/{colabtools}/models/Stable-diffusion -o {first_checkpoint}"
   subprocess.run(cmd, shell=True)
-  !aria2c --console-log-level=error -c -x 16 -s 16 -k 1M https://huggingface.co/lokCX/4x-Ultrasharp/resolve/main/4x-UltraSharp.pth -d /content/{colabtools}/models/ESRGAN/ -o 4x-UltraSharp.pth
-  !aria2c --console-log-level=error -c -x 16 -s 16 -k 1M https://huggingface.co/datasets/daasd/CN.csv/resolve/main/CN.csv -d /content/{colabtools}/extensions/a1111-sd-{wi}-tagcomplete/tags -o CN.csv
+    
   end_time = time.time()
   print("aria2c完成下载耗时：", end_time-start_time, "秒")
 
