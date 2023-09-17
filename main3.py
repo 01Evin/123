@@ -7,17 +7,9 @@ import json
 import re
 import os
 
-# 自动查找config.json文件
-def find_config_json(root_path, config_json_name):
-    for file_name in os.listdir(root_path):
-        file_path = os.path.join(root_path, file_name)
-        if os.path.isdir(file_path):
-            res = find_model_json(file_path, config_json_name)
-            if res is not None:
-                return res
-        elif file_name == config_json_name:
-            print("找到config.json文件：", file_path)
-            return file_path
+folder_path = "/content/colabtools"
+# 使用os.chdir()进入文件夹
+os.chdir(folder_path)S
             
 def rec_config_json():
   json_content = {
