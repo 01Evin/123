@@ -10,12 +10,7 @@ def generate_random_string(length):
     return ''.join(random.choice(letters) for _ in range(length))
 colabtools ="colabtools_"+generate_random_string(6)
 
-if sd_wi=="anapnoe手机端完美适配":
-  !git clone https://github.com/anapnoe/{sd} /content/{colabtools}
-elif sd_wi=="AUTOMATIC1111原版v1.3.0(稳定)":
-  !git clone -b v1.3.0 --single-branch https://github.com/{ATM}/{sd} /content/{colabtools}
-else:
-  !git clone -b v1.6.0 --single-branch https://github.com/{ATM}/{sd} /content/{colabtools}
+!git clone -b v1.6.0 --single-branch https://github.com/{ATM}/{sd} /content/{colabtools}
 
 import concurrent.futures
 import time
