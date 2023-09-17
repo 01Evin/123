@@ -73,7 +73,7 @@ if os.path.exists("/content/drive/MyDrive/lora"):
   import subprocess
 # 用subprocess执行rsync命令
 source1 = "/content/drive/MyDrive/lora/*"
-destination1 = f"/content/colabtools/models/lora"
+destination1 = f"/content/colabtools/models/Lora"
 commandw = f"sudo rsync -a {source1} {destination1}"
 subprocess.run(commandw, shell=True, check=True)
 print("已加载云盘里的lora")
