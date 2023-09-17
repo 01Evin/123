@@ -56,27 +56,37 @@ commandB = "apt install rsync"
 subprocess.run(commandA, shell=True)
 subprocess.run(commandB, shell=True)
 
+import shutil
+if os.path.exists("/content/drive/MyDrive/VAE"):
+  import subprocess
+# 用subprocess执行rsync命令
+source0 = "/content/drive/MyDrive/VAE/*"
+destination0 = f"/content/colabtools/models/VAE"
+commandQ = f"sudo rsync -a {source0} {destination0}"
+subprocess.run(commandQ, shell=True, check=True)
+print("已加载云盘里的VAE")
+
+import shutil
+directory_path = f"/content/colabtools/models/lora"
+subprocess.run(["mkdir", "-p", directory_path])
+if os.path.exists("/content/drive/MyDrive/lora"):
+  import subprocess
+# 用subprocess执行rsync命令
+source1 = "/content/drive/MyDrive/lora/*"
+destination1 = f"/content/colabtools/models/lora"
+commandw = f"sudo rsync -a {source1} {destination1}"
+subprocess.run(commandw, shell=True, check=True)
+print("已加载云盘里的lora")
+
 if os.path.exists("/content/drive/MyDrive/extensions"):
   import subprocess
 # 用subprocess执行rsync命令
-source0 = "/content/drive/MyDrive/extensions/*"
-destination0 = f"/content/colabtools/extensions"
-command = f"rsync -a {source0} {destination0}"
+source = "/content/drive/MyDrive/extensions/*"
+destination = f"/content/colabtools/extensions"
+command = f"sudo rsync -a {source} {destination}"
+subprocess.run(command, shell=True, check=True)
 print("已加载云盘里的插件")
 
-if os.path.exists("/content/drive/MyDrive/embeddings"):
-  import subprocess
-# 用subprocess执行rsync命令
-source1 = "/content/drive/MyDrive/embeddings/*"
-destination1 = f"/content/colabtools/embeddings"
-command = f"sudo rsync -a {source1} {destination1}"
-print("已加载云盘里的embeddings")
 
-if os.path.exists("/content/drive/MyDrive/embeddings"):
-  import subprocess
-# 用subprocess执行rsync命令
-source2 = "/content/drive/MyDrive/VAE/*"
-destination2 = f"/content/colabtools/models/VAE"
-command = f"sudo rsync -a {source2} {destination2}"
-print("已加载云盘里的VAE")
+
 
