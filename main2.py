@@ -26,3 +26,4 @@ subprocess.run(command4, shell=True)
 
 command5 = "pip install xformers xformers==0.0.20"
 subprocess.run(command5, shell=True)
+print("Done!")
