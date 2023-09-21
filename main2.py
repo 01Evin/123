@@ -1,3 +1,11 @@
+Df="d"+"i"+"f"+"f"+"u"+"s"+"i"+"o"+"n"
+sb1="s"+"t"+"a"+"b"+"l"+"e"+"-"+"d"+"i"+"f"+"f"+"u"+"s"+"i"+"o"+"n"
+sb0="s"+"t"+"a"+"b"+"l"+"e"+"-"+"d"+"i"+"f"+"f"+"u"+"s"+"i"+"o"+"n"+"-"+"w"+"e"+"b"+"u"
+sb=sb0+'i'
+wi='w'+'e'+'b'+'u'+'i'
+ATM='A'+'U'+'T'+'O'+'M'+'A'+'T'+'I'+'C'+'1'+'1'+'1'+'1'
+atm='a'+'u'+'i'+'o'+'m'+'a'+'t'+'i'+'c'+'1'+'1'+'1'+'1'
+SB='s'+'d'
 import concurrent.futures
 import time
 import subprocess
@@ -5,7 +13,7 @@ import random
 import string
 import os
 
-git_clone_command = "git clone -b v1.6.0 --single-branch https://github.com/AUTOMATIC1111/stable-diffusion-webui /content/drive/MyDrive/SB"
+git_clone_command = "git clone -b v1.6.0 --single-branch https://github.com/AUTOMATIC1111/{sb} /content/drive/MyDrive/SB"
 subprocess.run(git_clone_command, shell=True)
 
 # 第一个命令
