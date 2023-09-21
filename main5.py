@@ -36,7 +36,7 @@ subprocess.run(command04, shell=True)
 command05 = "pip install pytorch-lightning==1.7.7"
 subprocess.run(command05, shell=True)
 
-command00 = "npm install -g localtunnel"
+command00 = "npm install -g localtunnel --quiet"
 subprocess.run(command00, shell=True)
 
 def iframe_thread(port):
@@ -57,7 +57,7 @@ def iframe_thread(port):
 threading.Thread(target=iframe_thread, daemon=True, args=(8188,)).start()
 
 # 用您的系统命令替换下面的内容
-system_command = "python launch.py --share --lowram  --disable-safe-unpickle --disable-console-progressbars --xformers --enable-insecure-extension-access  --opt-sub-quad-attention --opt-channelslast --api --theme dark"
+system_command = "python launch.py --quiet --share --lowram  --disable-safe-unpickle --disable-console-progressbars --xformers --enable-insecure-extension-access  --opt-sub-quad-attention --opt-channelslast --api --theme dark"
 
 # 使用subprocess执行命令
 subprocess.run(system_command, shell=True)
