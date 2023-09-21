@@ -30,7 +30,7 @@ subprocess.run(command02, shell=True)
 command03 = "git -C \"/content/drive/MyDrive/SB/repositories/CodeFormer\" checkout --force c5b4593074ba6214284d6acd5f1719b6c5d739af"
 subprocess.run(command03, shell=True)
 
-command04 = "pip install gradio_client==0.2.7"
+command04 = "pip install gradio_client==0.2.7 &amp;&gt; /dev/null"
 subprocess.run(command04, shell=True)
 
 command05 = "pip install pytorch-lightning==1.7.7"
@@ -57,7 +57,7 @@ def iframe_thread(port):
 threading.Thread(target=iframe_thread, daemon=True, args=(8188,)).start()
 
 # 用您的系统命令替换下面的内容
-system_command = "python launch.py --share --lowram  --disable-safe-unpickle --disable-console-progressbars --xformers --enable-insecure-extension-access  --opt-sub-quad-attention --opt-channelslast --api --theme dark --quiet"
+system_command = "python launch.py --share --lowram  --disable-safe-unpickle --disable-console-progressbars --xformers --enable-insecure-extension-access  --opt-sub-quad-attention --opt-channelslast --api --theme dark"
 
 # 使用subprocess执行命令
 subprocess.run(system_command, shell=True)
