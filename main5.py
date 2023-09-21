@@ -21,8 +21,23 @@ folder_path = "/content/drive/MyDrive/SB"
 # 使用os.chdir()进入文件夹
 os.chdir(folder_path)
 
-command01 = "npm install -g localtunnel"
+command01 = "rm -rf /content/drive/MyDrive/SB/repositories/CodeFormer"
 subprocess.run(command01, shell=True)
+
+command02 = "git clone https://github.com/sczhou/CodeFormer /content/drive/MyDrive/SB/repositories/CodeFormer"
+subprocess.run(command02, shell=True)
+
+command03 = "git -C \"/content/drive/MyDrive/SB/repositories/CodeFormer\" checkout --force c5b4593074ba6214284d6acd5f1719b6c5d739af"
+subprocess.run(command03, shell=True)
+
+command04 = "pip install gradio_client==0.2.7"
+subprocess.run(command04, shell=True)
+
+command05 = "pip install pytorch-lightning==1.7.7"
+subprocess.run(command05, shell=True)
+
+command00 = "npm install -g localtunnel"
+subprocess.run(command00, shell=True)
 
 def iframe_thread(port):
   while True:
@@ -32,7 +47,7 @@ def iframe_thread(port):
       if result == 0:
         break
       sock.close()
-  print("\n{CF} finished loading, trying to launch localtunnel (if it gets stuck here localtunnel is having issues)\n")
+  print("\n{SB} finished loading, trying to launch localtunnel (if it gets stuck here localtunnel is having issues)\n")
 
   print("The password/enpoint ip for localtunnel is:", urllib.request.urlopen('https://ipv4.icanhazip.com').read().decode('utf8').strip("\n"))
   p = subprocess.Popen(["lt", "--port", "{}".format(port)], stdout=subprocess.PIPE)
