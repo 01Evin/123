@@ -61,5 +61,3 @@ system_command = "python launch.py --share --lowram  --disable-safe-unpickle --d
 
 # 使用subprocess执行命令
 subprocess.run(system_command, shell=True)
-
-&amp;&gt; /dev/null
